@@ -3,7 +3,10 @@ import { drizzle } from 'drizzle-orm/neon-serverless';
 import ws from "ws";
 import * as schema from "@shared/schema";
 
-neonConfig.webSocketConstructor = ws;
+// Only set websocket constructor if we're not in a native PostgreSQL environment
+if (process.env.NODE_ENV !== 'development-local') {
+  neonConfig.webSocketConstructor = ws;
+}
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
@@ -11,5 +14,13 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const poolConfig = {
+  connectionString: process.env.DATABASE_URL,
+  // Add SSL requirement for remote database
+  ssl: process.env.NODE_ENV !== 'development-local' ? {
+    rejectUnauthorized: false
+  } : false
+};
+
+export const pool = new Pool(poolConfig);
 export const db = drizzle({ client: pool, schema });
