@@ -1,3 +1,4 @@
+
 import React, { Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
