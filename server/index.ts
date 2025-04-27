@@ -43,7 +43,23 @@ app.use((req, res, next) => {
   }
 
   const port = 5000;
-  app.listen(port, "0.0.0.0", () => {
+  const server = app.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
+  });
+
+  server.on('error', (error) => {
+    log('Server error:', error);
+  });
+
+  process.on('unhandledRejection', (reason, promise) => {
+    log('Unhandled Rejection at:', promise, 'reason:', reason);
+  });
+
+  process.on('uncaughtException', (error) => {
+    log('Uncaught Exception:', error);
+    // Give the server a grace period to finish pending requests
+    server.close(() => {
+      process.exit(1);
+    });
   });
 })();
