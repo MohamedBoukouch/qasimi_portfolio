@@ -1,4 +1,5 @@
 import { useRef, useState, FormEvent } from "react";
+import emailjs from '@emailjs/browser';
 import { motion, useInView } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
 import MainLayout from "@/layouts/MainLayout";
@@ -142,18 +143,26 @@ export default function Home() {
     }
 
     try {
-      // Create mailto URL
-      const mailtoUrl = `mailto:soufiane.elqasemy.45@edu.uiz.ac.ma?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )}`;
-      
-      // Open default email client
-      window.location.href = mailtoUrl;
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: "Soufiane El Qasemy",
+      };
+
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        templateParams,
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      );
 
       // Show success message
       toast({
-        title: "Success",
-        description: "Email client opened. Please send your message from there.",
+        title: "Message Sent",
+        description: "Thank you for your message. I'll get back to you soon!",
       });
 
       // Reset form
