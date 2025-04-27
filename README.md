@@ -10,7 +10,7 @@ I'm passionate about creating elegant solutions to complex problems. This portfo
 - **Dark Mode**: Easy on the eyes, day or night
 - **Project Showcase**: Detailed look at my best work
 - **Skills Overview**: Visual representation of my technical expertise
-- **Get in Touch**: A secure way to reach out to me
+- **Contact Form**: Integrated EmailJS for direct messaging
 
 ## Built With ⚡
 
@@ -19,38 +19,29 @@ I'm passionate about creating elegant solutions to complex problems. This portfo
 - Tailwind CSS for sleek styling
 - Framer Motion for delightful animations
 - Shadcn UI for beautiful components
+- EmailJS for contact form functionality
 
 ### Backend Power
 - Express.js handling requests
-- PostgreSQL storing data securely
 - Node.js keeping everything running smoothly
-
-## Take a Look Around 🔍
-
-### Homepage
-[Screenshot coming soon!]
-
-### Project Gallery
-[Screenshot coming soon!]
-
-### Skills & Experience
-[Screenshot coming soon!]
 
 ## Getting Started 🛠️
 
 Want to run this locally? Here's how:
 
 1. Clone the repo
-2. Install everything: `npm install`
-3. Start it up: `npm run dev`
-4. Visit `http://localhost:5000`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Visit `http://0.0.0.0:5000`
 
 ## Project Structure 📁
 
 ```
-├── client/          # Where the magic happens (Frontend)
-├── server/          # Keeping things running (Backend)
-└── shared/          # Code we use everywhere
+├── client/          # Frontend code (React + TypeScript)
+│   ├── public/      # Static assets
+│   └── src/         # Source code
+├── server/          # Backend code (Express)
+└── shared/          # Shared types and utilities
 ```
 
 ## Features You'll Love ❤️
@@ -58,8 +49,8 @@ Want to run this locally? Here's how:
 - **Project Showcase**: Each project tells its own story
 - **Interactive Skills Display**: See what I'm good at
 - **Professional Journey**: My experience timeline
-- **Easy Contact**: Reach out anytime
-- **Admin Dashboard**: Behind the scenes magic
+- **Easy Contact**: Direct messaging through EmailJS
+- **Responsive Design**: Looks great on all devices
 
 ## What's Next? 🎯
 
@@ -67,8 +58,8 @@ I'm always improving! Here's what's coming:
 - [ ] Blog section to share my thoughts
 - [ ] More interactive elements
 - [ ] Enhanced project filtering
-- [ ] Improved admin features
+- [ ] Performance optimizations
 
 ## Let's Connect! 🤝
 
-Found something interesting? Have questions? Feel free to reach out!
+Found something interesting? Have questions? Feel free to reach out through the contact form!
