@@ -136,8 +136,8 @@ export default function Home() {
       return;
     }
 
-    // Validate message length
-    if (formData.message.length < 10) {
+    // Validate message length and content
+    if (formData.message.length < 10 || !/\S/.test(formData.message)) {
       toast({
         variant: "destructive",
         title: "Error",
@@ -152,9 +152,18 @@ export default function Home() {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
         to_name: "Soufiane El Qasemy",
+        subject: `Portfolio Contact: ${formData.subject}`,
+        message: `
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+---
+This message was sent through your portfolio contact form.`,
       };
 
       await emailjs.send(
