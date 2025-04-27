@@ -46,9 +46,9 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
   });
 
-  server.on('upgrade', (request, socket, head) => {
-    socket.on('error', (err) => {
-      console.error('WebSocket error:', err);
-    });
-  });
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
 })();
