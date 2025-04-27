@@ -108,12 +108,7 @@ export default function Home() {
     setIsSubmitting(true);
 
     // Validate the form data
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.subject ||
-      !formData.message
-    ) {
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       toast({
         variant: "destructive",
         title: "Error",
@@ -135,7 +130,7 @@ export default function Home() {
       return;
     }
     
-    // Validate message length (server requires at least 10 characters)
+    // Validate message length
     if (formData.message.length < 10) {
       toast({
         variant: "destructive",
@@ -147,25 +142,18 @@ export default function Home() {
     }
 
     try {
-      // Send the message to the server
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Server validation error:', errorData);
-        throw new Error(errorData.errors || errorData.message || 'Failed to send message');
-      }
+      // Create mailto URL
+      const mailtoUrl = `mailto:soufiane.elqasemy.45@edu.uiz.ac.ma?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      
+      // Open default email client
+      window.location.href = mailtoUrl;
 
       // Show success message
       toast({
-        title: "Message Sent",
-        description: "Thank you for your message. I'll get back to you soon!",
+        title: "Success",
+        description: "Email client opened. Please send your message from there.",
       });
 
       // Reset form
@@ -176,11 +164,10 @@ export default function Home() {
         message: "",
       });
     } catch (error) {
-      console.error('Error sending message:', error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
+        description: "Failed to open email client. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
