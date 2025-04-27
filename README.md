@@ -34,18 +34,6 @@ Want to run this locally? Here's how:
 3. Start the development server: `npm run dev`
 4. Visit `http://0.0.0.0:5000`
 
-## Security Features 🔒
-
-This portfolio implements several security measures:
-
-- **HTTP Security Headers**: Comprehensive security headers including CSP, HSTS, and XSS protection
-- **Rate Limiting**: Protection against brute-force attacks on forms
-- **Input Validation**: Strict validation and sanitization of all user inputs
-- **Secure Dependencies**: Regular security audits of npm packages
-- **CORS Protection**: Configured Cross-Origin Resource Sharing
-- **Form Security**: Anti-spam measures and input length restrictions
-- **Data Sanitization**: Protection against XSS and injection attacks
-
 ## Project Structure 📁
 
 ```
