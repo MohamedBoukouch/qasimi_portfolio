@@ -1,5 +1,5 @@
 import { useRef, useState, FormEvent } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import { motion, useInView } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
 import MainLayout from "@/layouts/MainLayout";
@@ -109,7 +109,12 @@ export default function Home() {
     setIsSubmitting(true);
 
     // Validate the form data
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       toast({
         variant: "destructive",
         title: "Error",
@@ -130,7 +135,7 @@ export default function Home() {
       setIsSubmitting(false);
       return;
     }
-    
+
     // Validate message length
     if (formData.message.length < 10) {
       toast({
@@ -153,10 +158,10 @@ export default function Home() {
       };
 
       await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        "service_d7ed7tk", // Replace with your EmailJS service ID
+        "template_q9jax08", // Replace with your EmailJS template ID
         templateParams,
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        "0NQZ6bDvEKET2l14w", // Replace with your EmailJS public key
       );
 
       // Show success message
