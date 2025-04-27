@@ -55,10 +55,10 @@ Want to run this locally? Here's how:
 ## What's Next? 🎯
 
 I'm always improving! Here's what's coming:
-- [ ] Blog section to share my thoughts
-- [ ] More interactive elements
-- [ ] Enhanced project filtering
-- [ ] Performance optimizations
+-  Blog section to share my thoughts
+-  More interactive elements
+-  Enhanced project filtering
+-  Performance optimizations
 
 ## Let's Connect! 🤝
 
