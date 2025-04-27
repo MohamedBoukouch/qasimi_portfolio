@@ -104,9 +104,24 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle form submission
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    // Rate limiting
+    const now = Date.now();
+    if (now - lastSubmitTime < 60000) { // 1 minute cooldown
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please wait a minute before sending another message.",
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
+    setLastSubmitTime(now);
 
     // Validate the form data
     if (
@@ -136,12 +151,24 @@ export default function Home() {
       return;
     }
 
-    // Validate message length
-    if (formData.message.length < 10) {
+    // Validate message length and content
+    if (formData.message.length < 10 || formData.message.length > 1000) {
+      toast({
+        variant: "destructive", 
+        title: "Error",
+        description: "Message must be between 10 and 1000 characters.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Additional security validation
+    const sanitizedMessage = formData.message.trim();
+    if (!/^[\w\s.,!?@\-']+$/i.test(sanitizedMessage)) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "Message must be at least 10 characters long.",
+        title: "Error", 
+        description: "Message contains invalid characters.",
       });
       setIsSubmitting(false);
       return;
