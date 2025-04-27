@@ -1,4 +1,3 @@
-
 import express, { type Request, Response, NextFunction } from "express";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -43,7 +42,13 @@ app.use((req, res, next) => {
   }
 
   const port = 5000;
-  app.listen(port, "0.0.0.0", () => {
+  const server = app.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
+  });
+
+  server.on('upgrade', (request, socket, head) => {
+    socket.on('error', (err) => {
+      console.error('WebSocket error:', err);
+    });
   });
 })();
